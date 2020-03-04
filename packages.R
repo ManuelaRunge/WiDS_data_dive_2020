@@ -1,0 +1,15 @@
+# Loading packages ------------------------------------------------------------
+require(tidyverse)
+require(rgdal)
+require(maptools)
+require(rgeos)
+require(maps)
+require(mapproj)
+require(ggthemes)
+require(RCurl)
+require(lubridate)
+require(janitor)
+require(hms)
+require(kableExtra)
+require(naniar) #for all you R nerds, here is the a new package that is great for handling missingness
+require(sf)
