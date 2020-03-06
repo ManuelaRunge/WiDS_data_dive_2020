@@ -16,9 +16,44 @@ You will have **2.5 hours** to answer the primary question at the event.
 
 
 
-## Primary Question
 
-<span style="color: red;">**Remember, the PRIMARY and more substantial questions of interest will be released on 3/5 at the Data Dive. Your job before then is to simply consider the [exploratory questions](#exploratory-questions).**  </span>
+## Major Question
+
+
+Below is a table of number of incidents per neighborhood from 2015-2019 that the Chicago/Northern Illinois Red Cross responded to. There seems to be a few neighborhoods that have a lot of the incidents, those neighborhoods with over 150 incidents over the time period are shown in the simple bar chart. Our question is: **What is going on in these neighborhoods?**
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(kableExtra)
+red_cross<- read_rds("data/Redcross.rds")
+top_neighborhoods<-red_cross %>% 
+  group_by(primary_neighborhood) %>% 
+  tally() %>%
+  arrange(desc(n))
+top_neighborhoods %>% 
+  filter(n > 100) %>%
+  kable() %>%
+  kable_styling()
+
+
+top_neighborhoods %>%
+  filter(n > 150) %>%
+  ggplot(aes(reorder(primary_neighborhood, -n), n)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  xlab("Neighborhood") +
+  ylab("Incidents Responded to (2015-2019)") + 
+  ggtitle("Incident Counts Per Neighborhood")
+
+
+```
+
+**NOTE**: This is not a question that we or the Red Cross definitively know the answer to. Feel free to be as creative as time allows!
+
+
+## Minor Question
+With the first question looking into where these incidents are occuring, another questions the Red Cross is asking is **when these incidents are occuring?** Look at seasonality of the dataset at a monthly, weekly, and/or daily level.
 
 # The Data
 
