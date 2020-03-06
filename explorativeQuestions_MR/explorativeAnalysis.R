@@ -44,6 +44,32 @@ red_cross %>%
   labs(
     title="",x = "", y = "Number of incidents")
 
+red_cross %>%
+  mutate(year = year(date), count=1) %>%
+  group_by(year, incident_type) %>%
+  summarize(count=sum(count)) %>%
+  ggplot() + theme_calc() +
+  geom_bar(aes(x = year, y = count, fill=incident_type), stat = "identity", position = "stack") +
+  labs(
+    title="",x = "", y = "Number of incidents")
+
+### by neighbourhood
+table(red_cross$pri_neigh)
+length(unique(red_cross$pri_neigh))
+sub <- red_cross %>% group_by(pri_neigh) %>% mutate(count=1) %>%  summarize(totalcount = sum(count)) %>% mutate(counthigh =ifelse(totalcount>=150,1,0))
+  
+
+red_cross %>%
+  mutate(year = year(date), count=1) %>%
+  group_by(year,  pri_neigh) %>%
+  summarize(count=sum(count)) %>%
+  ggplot() + theme_calc() +
+  geom_bar(aes(x = reorder(pri_neigh, count), y = count, fill=year), stat = "identity", position = "stack") +
+  labs(
+    title="",x = "", y = "Number of incidents")+
+  geom_hline(yintercept=0)
+
+
 
 ## ----------------------------------------------------------------
 ### 2. How often is the Red Cross responding to incidents?
@@ -96,7 +122,8 @@ il_map_df %>%
   coord_quickmap() +
   theme_map() + 
   facet_wrap(~year) +
-  labs(title='Sum of financial assistance per Chicago Neighborhood 2019') 
+  labs(title='Sum of financial assistance per Chicago Neighborhood 2019') +
+  customThemeNoFacet
 
 
 ## ----------------------------------------------------------------

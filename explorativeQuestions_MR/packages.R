@@ -17,3 +17,4 @@ require(naniar) #for all you R nerds, here is the a new package that is great fo
 require(sf)
 
 
+library(ggmap)

@@ -5,11 +5,11 @@
 list.files("data")
 calls <- read_csv(file.path("data/calls_311.csv")) %>%  as_tibble() %>%   clean_names()
 vacant <- read_csv(file.path("data/vacant.csv")) %>%  as_tibble() %>%   clean_names()
-benchmark<- read_csv(file.path("data/energy_benchmark.csv")) %>%  as_tibble() %>%   clean_names()
+#benchmark<- read_csv(file.path("data/energy_benchmark.csv")) %>%  as_tibble() %>%   clean_names()
 inspect <- read_csv(file.path("data/enviro_inspection.csv")) %>%  as_tibble() %>%   clean_names()
 commun <- read_csv(file.path("data/chicago_community_data.csv")) %>%  as_tibble() %>%   clean_names()
-red_cross <- read_rds("data/Redcross.rds") %>%  as_tibble() %>%   clean_names()
-
+#red_cross <- read_rds("data/Redcross.rds") %>%  as_tibble() %>%   clean_names()
+red_cross <- read_csv(file.path("data/redcross.csv")) %>%  as_tibble() %>%   clean_names()
 
 #### assign same names to same variables 
 red_cross <- red_cross %>% rename(pri_neigh =  primary_neighborhood, sec_neigh = secondary_neighborhood)
@@ -33,6 +33,7 @@ il_map_dat@data <- il_map_dat@data %>%
 il_map_dat@data$id <- rownames(il_map_dat@data)
 ### Fortify
 il_points <- fortify(il_map_dat, region = "pri_neigh") %>% as_tibble()
+
 
 
 
