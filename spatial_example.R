@@ -1,8 +1,25 @@
 ### Spatial example
 ### from: https://menawhalen.github.io/WiDS_data_dive_2020/#the-data
 
-##Testing Push 
-source("packages.R")
+
+##-------------------------------------
+# PACKAGES
+##-------------------------------------
+require(tidyverse)
+require(rgdal)
+require(maptools)
+require(rgeos)
+require(maps)
+require(mapproj)
+require(ggthemes)
+require(RCurl)
+require(lubridate)
+require(janitor)
+require(hms)
+require(kableExtra)
+require(naniar) #for all you R nerds, here is the a new package that is great for handling missingness
+require(sf)
+
 
 # Illinois Zip Code Map ----------------------------------------------------
 red_cross <- read_rds("data/Redcross.rds") %>% 
